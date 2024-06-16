@@ -1,0 +1,10 @@
+# misc
+.DS_Store
+*.pem
+__pycache__/
+
+# debug
+*.log
+
+# local env files
+.env*
