@@ -16,8 +16,17 @@ func NewVideoRepository(db *gorm.DB) domain.VideoRepository {
 }
 
 func (r *videoRepository) SearchVideosByString(searchString string, sortColumn string, sortOrder string, page int) (*[]domain.Video, error) {
+	const pageSize = 50
 	var videos []domain.Video
-	err := r.db.Where("MATCH (title) AGAINST (? IN BOOLEAN MODE)", serchString).Order(sortColumn + " " + sortOrder).Limit(20).Offset((page - 1) * 20).Find(&videos).Error
+	var err error
+
+	if searchString == "" {
+		// if no search string, return all videos
+		err = r.db.Order(sortColumn + " " + sortOrder).Limit(pageSize).Offset((page - 1) * pageSize).Find(&videos).Error
+	} else {
+		// search by string
+		err = r.db.Where("MATCH (title) AGAINST (? IN BOOLEAN MODE)", searchString).Order(sortColumn + " " + sortOrder).Limit(pageSize).Offset((page - 1) * pageSize).Find(&videos).Error
+	}
 
 	if err != nil {
 		config.Logger.Error(err.Error())

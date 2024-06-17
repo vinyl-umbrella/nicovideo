@@ -22,10 +22,6 @@ func (h *VideoHandler) SearchVideos(c *gin.Context) {
 
 	// validate q
 	searchString := c.Query("q")
-	if searchString == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid search"})
-		return
-	}
 
 	// validate order
 	order := c.Query("order")
