@@ -2,23 +2,28 @@ import style from './style.css';
 
 import { useEffect, useRef, useState } from 'preact/hooks';
 import callApi from '../../func/callApi';
+import Page from './page';
 import Videos from '../videos';
 
 const Home = () => {
-  const searchText = useRef(null);
+  const searchText = useRef('');
   const [videoList, setVideoList] = useState([]);
 
   useEffect(() => {
-    if (searchText.current.value === '') {
-      searchText.current.value = new URLSearchParams(window.location.search).get('q') || '';
-      search();
-    }
+    searchText.current.value = new URLSearchParams(window.location.search).get('q') || '';
+    const page = new URLSearchParams(window.location.search).get('page') || 1;
+
+    search(page);
   }, []);
 
-  async function search() {
-    document.title = `「${searchText.current.value}」の検索結果 - ニコ動 (Re:仮) 検索サービス (仮)`;
-    if (searchText.current.value == '') return;
-    const j = await callApi.search(searchText.current.value, 1);
+  async function search(page) {
+    if (searchText.current.value === '') {
+      document.title = 'ニコ動 (Re:仮) 検索サービス (仮)';
+    } else {
+      document.title = `「${searchText.current.value}」の検索結果 - ニコ動 (Re:仮) 検索サービス (仮)`;
+    }
+
+    const j = await callApi.search(searchText.current.value, page);
     setVideoList([...j]);
   }
 
@@ -36,7 +41,7 @@ const Home = () => {
   async function onSubmit(e) {
     e.preventDefault();
     updateHistory();
-    await search();
+    await search(1);
   }
 
   return (
@@ -45,7 +50,8 @@ const Home = () => {
         <input type='text' placeholder='Search...' ref={searchText} />
         <button type='submit'>検索</button>
       </form>
-      {searchText != '' && videoList.length === 0 ? <div>検索結果 0件</div> : <Videos v={videoList} />}
+      {videoList.length === 0 ? <div>検索結果 0件</div> : <Videos v={videoList} />}
+      <Page />
     </div>
   );
 };

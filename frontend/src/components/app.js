@@ -1,5 +1,6 @@
 import Header from './header';
 import Home from './home';
+import Footer from './footer';
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
       <main>
         <Home />
       </main>
+      <Footer />
     </div>
   );
 };

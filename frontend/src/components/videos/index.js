@@ -1,6 +1,6 @@
 import style from './style.css';
 
-import VideoCard from './video';
+import VideoCard from './card';
 
 const Videos = (props) => {
   return (
