@@ -25,7 +25,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	videoUsecase := usecase.NewVideoUsecase(videoRepo)
 	videoHandler := handler.NewVideoHandler(videoUsecase)
 
-	r.GET("/api/v1/search", videoHandler.SearchVideos)
+	r.GET("/v1/search", videoHandler.SearchVideos)
 
 	return r
 }
