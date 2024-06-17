@@ -13,6 +13,6 @@ func NewVideoUsecase(repo domain.VideoRepository) VideoUsecase {
 	return &videoUsecase{videoRepository: repo}
 }
 
-func (v *videoUsecase) SearchVideos(serchString string, sortColumn string, sortOrder string, page int) (*[]domain.Video, error) {
-	return v.videoRepository.SearchVideosByString(serchString, sortColumn, sortOrder, page)
+func (v *videoUsecase) SearchVideos(searchString string, sortColumn string, sortOrder string, page int) (*[]domain.Video, error) {
+	return v.videoRepository.SearchVideosByString(searchString, sortColumn, sortOrder, page)
 }

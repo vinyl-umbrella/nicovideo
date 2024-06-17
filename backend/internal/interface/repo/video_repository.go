@@ -15,7 +15,7 @@ func NewVideoRepository(db *gorm.DB) domain.VideoRepository {
 	return &videoRepository{db}
 }
 
-func (r *videoRepository) SearchVideosByString(serchString string, sortColumn string, sortOrder string, page int) (*[]domain.Video, error) {
+func (r *videoRepository) SearchVideosByString(searchString string, sortColumn string, sortOrder string, page int) (*[]domain.Video, error) {
 	var videos []domain.Video
 	err := r.db.Where("MATCH (title) AGAINST (? IN BOOLEAN MODE)", serchString).Order(sortColumn + " " + sortOrder).Limit(20).Offset((page - 1) * 20).Find(&videos).Error
 
