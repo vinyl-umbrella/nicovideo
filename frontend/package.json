@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "preact build",
-    "dev": "preact watch",
+    "dev": "preact watch -p 3000",
     "fmt": "prettier --write --ignore-path .gitignore './src/**/*.{html,css,js,jsx,json}'"
   },
   "devDependencies": {
