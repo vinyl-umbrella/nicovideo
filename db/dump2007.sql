@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `videos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `videos` (
-  `vid` int NOT NULL,
+  `vid` varchar(127) NOT NULL,
   `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_ci NOT NULL,
-  `owner_nickname` text COLLATE utf8mb4_general_ci NOT NULL,
+  `owner_nickname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_ci NOT NULL,
   `duration` int NOT NULL,
   `registered_at` datetime NOT NULL,
