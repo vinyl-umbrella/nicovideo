@@ -28,6 +28,7 @@ const Home = () => {
   }
 
   function updateHistory() {
+    if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
     searchParams.set('q', searchText.current.value);

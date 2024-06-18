@@ -2,6 +2,7 @@ import style from './style.css';
 
 const Page = () => {
   function getCurrentPageNum() {
+    if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
     const page = searchParams.get('page');
@@ -9,6 +10,7 @@ const Page = () => {
   }
 
   function getPrevPage() {
+    if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
     const currentPage = getCurrentPageNum();
@@ -21,6 +23,7 @@ const Page = () => {
   }
 
   function getNextPage() {
+    if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
     const currentPage = getCurrentPageNum();
