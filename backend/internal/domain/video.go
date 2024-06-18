@@ -1,7 +1,7 @@
 package domain
 
 type Video struct {
-	Vid           int    `json:"vid"`
+	Vid           string `json:"vid"`
 	Title         string `json:"title"`
 	OwnerNickname string `json:"ownerNickname"`
 	Description   string `json:"description"`
