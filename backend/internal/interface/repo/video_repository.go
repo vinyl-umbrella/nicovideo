@@ -25,7 +25,7 @@ func (r *videoRepository) SearchVideosByString(searchString string, sortColumn s
 		err = r.db.Order(sortColumn + " " + sortOrder).Limit(pageSize).Offset((page - 1) * pageSize).Find(&videos).Error
 	} else {
 		// search by string
-		err = r.db.Where("MATCH (title) AGAINST (? IN BOOLEAN MODE)", searchString).Order(sortColumn + " " + sortOrder).Limit(pageSize).Offset((page - 1) * pageSize).Find(&videos).Error
+		err = r.db.Where("MATCH (title, description) AGAINST (? IN BOOLEAN MODE)", searchString).Order(sortColumn + " " + sortOrder).Limit(pageSize).Offset((page - 1) * pageSize).Find(&videos).Error
 	}
 
 	if err != nil {

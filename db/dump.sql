@@ -26,7 +26,7 @@ CREATE TABLE `videos` (
   `vid` int NOT NULL,
   `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_ci NOT NULL,
   `owner_nickname` text COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_ci NOT NULL,
   `duration` int NOT NULL,
   `registered_at` datetime NOT NULL,
   `view_count` int NOT NULL DEFAULT '0',
@@ -34,7 +34,7 @@ CREATE TABLE `videos` (
   `mylist_count` int NOT NULL DEFAULT '0',
   `like_count` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`vid`),
-  FULLTEXT KEY `title` (`title`) /*!50100 WITH PARSER `ngram` */ 
+  FULLTEXT KEY `title_description` (`title`, `description`) /*!50100 WITH PARSER `ngram` */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
